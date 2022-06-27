@@ -1,21 +1,22 @@
 const mongoose = require("mongoose");
 
-const Goal = mongoose.model(
-    "Goal",
+// GPE - Goal/Process/Event
+const Gpe = mongoose.model(
+    "Gpe",
     new mongoose.Schema({
         date: Date,
         deadline: Date,
         duration: String,
-        goal: String,
+        gpe: String,
         projects: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Project"
         }],
-        prevGoals: [{
+        prevGpes: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Goal"
+            ref: "Gpe"
         }]
     })
 );
 
-module.exports = Goal;
+module.exports = Gpe;

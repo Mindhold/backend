@@ -32,6 +32,7 @@ db.mongoose
         process.exit();
     });
 
+require('./app/routes/closet.routes')(app);
 require('./app/routes/test')(app);
 const PORT = process.env.PORT || 8080;
 
