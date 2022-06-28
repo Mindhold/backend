@@ -1,4 +1,4 @@
-const { createCloset, deleteCloset, changeCloset, readClosets } = require("../controllers/closet.controller.js");
+const { createCloset, deleteCloset, changeCloset, readAllClosets } = require("../controllers/closet.controller.js");
  
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -9,7 +9,7 @@ module.exports = function(app) {
         next();
     });
 
-    app.get("/closet", readClosets)
+    app.get("/closet", readAllClosets)
     app.post("/closet", createCloset);
     app.delete("/closet", deleteCloset);
     app.put("/closet", changeCloset);
