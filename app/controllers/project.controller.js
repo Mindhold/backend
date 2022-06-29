@@ -8,7 +8,6 @@ async function readAllProjects(req, res) {
 
 const createProject = (req, res) => {
     const project = new Project({
-        date: new Date(),
         title: req.body.title
     })
 

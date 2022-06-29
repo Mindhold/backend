@@ -36,6 +36,7 @@ require('./app/routes/closet.routes')(app);
 require('./app/routes/gpe.routes')(app);
 require('./app/routes/message.routes')(app);
 require('./app/routes/project.routes')(app);
+require('./app/routes/priority.routes')(app);
 require('./app/routes/test')(app);
 const PORT = process.env.PORT || 8080;
 
