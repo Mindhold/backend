@@ -38,7 +38,6 @@ async function changeMessage(req, res) {
     const id = req.body.id;
 
     const updatedMessage = await Message.findOneAndUpdate({ _id: id }, {
-        date: req.body.date,
         content: req.body.content,
         projects: req.body.projects
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
