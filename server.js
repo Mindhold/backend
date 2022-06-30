@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./app/models/index.js");
 const dbConfig = require("./app/config/db.config.js");
 
-var uri = null;
+const uri = `mongodb+srv://marc-mindhold:DX68dVhRTHcjToFV@mindhold-test.cftfsjd.mongodb.net/?retryWrites=true&w=majority`;
 db.mongoose
     .connect(uri || `mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
         useNewUrlParser: true,
