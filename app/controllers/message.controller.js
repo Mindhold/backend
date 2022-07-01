@@ -8,6 +8,7 @@ async function readAllMessages(req, res) {
 
 const createMessage = (req, res) => {
     const message = new Message({
+        id: req.body.id,
         date: req.body.date,
         content: req.body.content,
         projects: req.body.projects
@@ -23,9 +24,7 @@ const createMessage = (req, res) => {
 }
 
 const deleteMessage = (req, res) => {
-    const id = req.body.id;
-
-    Message.deleteOne({ _id: id }, function (err) {
+    Message.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });
             return;
@@ -35,9 +34,7 @@ const deleteMessage = (req, res) => {
 }
 
 async function changeMessage(req, res) {
-    const id = req.body.id;
-
-    const updatedMessage = await Message.findOneAndUpdate({ _id: id }, {
+    const updatedMessage = await Message.findOneAndUpdate({ id: req.body.id }, {
         content: req.body.content,
         projects: req.body.projects
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {

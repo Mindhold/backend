@@ -8,6 +8,7 @@ async function readAllGpes(req, res) {
 
 const createGpe = (req, res) => {
     const gpe = new Gpe({
+        id: req.body.id,
         date: new Date(),
         deadline: req.body.deadline,
         duration: req.body.duration,
@@ -26,9 +27,7 @@ const createGpe = (req, res) => {
 }
 
 const deleteGpe = (req, res) => {
-    const id = req.body.id;
-
-    Gpe.deleteOne({ _id: id }, function (err) {
+    Gpe.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });
             return;
@@ -38,9 +37,7 @@ const deleteGpe = (req, res) => {
 }
 
 async function changeGpe(req, res) {
-    const id = req.body.id;
-
-    const updatedGpe = await Gpe.findOneAndUpdate({ _id: id }, {
+    const updatedGpe = await Gpe.findOneAndUpdate({ id: req.body.id }, {
         deadline: req.body.deadline,
         duration: req.body.duration,
         gpe: req.body.gpe,

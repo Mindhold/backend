@@ -8,6 +8,7 @@ async function readAllPriorities(req, res) {
 
 const createPriority = (req, res) => {
     const priority = new Priority({
+        id: req.body.id,
         title: req.body.title,
         projects: req.body.projects
     })
@@ -22,9 +23,7 @@ const createPriority = (req, res) => {
 }
 
 const deletePriority = (req, res) => {
-    const id = req.body.id;
-
-    Priority.deleteOne({ _id: id }, function (err) {
+    Priority.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });
             return;
@@ -34,9 +33,7 @@ const deletePriority = (req, res) => {
 }
 
 async function changePriority(req, res) {
-    const id = req.body.id;
-
-    const updatedPriority = await Priority.findOneAndUpdate({ _id: id }, {
+    const updatedPriority = await Priority.findOneAndUpdate({ id: req.body.id }, {
         title: req.body.title,
         projects: req.body.projects
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {

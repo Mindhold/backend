@@ -8,6 +8,7 @@ async function readAllClosets(req, res) {
 
 const createCloset = (req, res) => {
     const closet = new Closet({
+        id: req.body.id,
         date: new Date(),
         info: req.body.info,
         projects: req.body.projects,
@@ -24,9 +25,7 @@ const createCloset = (req, res) => {
 }
 
 const deleteCloset = (req, res) => {
-    const id = req.body.id;
-
-    Closet.deleteOne({ _id: id }, function (err) {
+    Closet.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });
             return;
@@ -36,9 +35,7 @@ const deleteCloset = (req, res) => {
 }
 
 async function changeCloset(req, res) {
-    const id = req.body.id;
-
-    const updatedCloset = await Closet.findOneAndUpdate({ _id: id }, {
+    const updatedCloset = await Closet.findOneAndUpdate({ id: req.body.id }, {
         info: req.body.info,
         projects: req.body.projects,
         linkedClosets: req.body.linkedClosets

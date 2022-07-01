@@ -4,16 +4,17 @@ const mongoose = require("mongoose");
 const Gpe = mongoose.model(
     "Gpe",
     new mongoose.Schema({
+        id: String,
         date: Date,
         deadline: Date,
         duration: String,
         gpe: String,
         projects: [{
-            type: mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.String,
             ref: "Project"
         }],
         prevGpes: [{
-            type: mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.String,
             ref: "Gpe"
         }]
     })

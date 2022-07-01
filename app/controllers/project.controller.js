@@ -8,6 +8,7 @@ async function readAllProjects(req, res) {
 
 const createProject = (req, res) => {
     const project = new Project({
+        id: req.body.id,
         title: req.body.title
     })
 
@@ -21,9 +22,7 @@ const createProject = (req, res) => {
 }
 
 const deleteProject = (req, res) => {
-    const id = req.body.id;
-
-    Project.deleteOne({ _id: id }, function (err) {
+    Project.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });
             return;
@@ -33,9 +32,7 @@ const deleteProject = (req, res) => {
 }
 
 async function changeProject(req, res) {
-    const id = req.body.id;
-
-    const updatedProject = await Project.findOneAndUpdate({ _id: id }, {
+    const updatedProject = await Project.findOneAndUpdate({ id: req.body.id }, {
         title: req.body.title
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {
