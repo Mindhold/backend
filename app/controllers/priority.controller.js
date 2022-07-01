@@ -1,5 +1,6 @@
 const db = require("../models/index.js");
 const Priority = db.priority;
+const Project = db.project;
 
 async function readAllPriorities(req, res) {
     const allPriorities = await Priority.find({});
@@ -9,8 +10,7 @@ async function readAllPriorities(req, res) {
 const createPriority = (req, res) => {
     const priority = new Priority({
         id: req.body.id,
-        title: req.body.title,
-        projects: req.body.projects
+        title: req.body.title
     })
 
     priority.save(err => {
@@ -23,6 +23,7 @@ const createPriority = (req, res) => {
 }
 
 const deletePriority = (req, res) => {
+    Project.deleteMany({ priorityId: req.body.id }, function (err) {if (err) console.log(err);}); // TODO: projects do not need to be removed along with priority
     Priority.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });
@@ -34,8 +35,7 @@ const deletePriority = (req, res) => {
 
 async function changePriority(req, res) {
     const updatedPriority = await Priority.findOneAndUpdate({ id: req.body.id }, {
-        title: req.body.title,
-        projects: req.body.projects
+        title: req.body.title
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {
                 res.status(500).send({ message: err });

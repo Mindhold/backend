@@ -9,7 +9,6 @@ async function readAllClosets(req, res) {
 const createCloset = (req, res) => {
     const closet = new Closet({
         id: req.body.id,
-        date: new Date(),
         info: req.body.info,
         projects: req.body.projects,
         linkedClosets: req.body.linkedClosets

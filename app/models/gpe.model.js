@@ -5,7 +5,6 @@ const Gpe = mongoose.model(
     "Gpe",
     new mongoose.Schema({
         id: String,
-        date: Date,
         deadline: Date,
         duration: String,
         gpe: String,

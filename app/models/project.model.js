@@ -4,7 +4,11 @@ const Project = mongoose.model(
     "Project",
     new mongoose.Schema({
         id: String,
-        title: String
+        title: String,
+        priorityId: {
+            type: mongoose.Schema.Types.String,
+            ref: "Priority"
+        }
     })
 );
 

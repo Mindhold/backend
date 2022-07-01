@@ -4,7 +4,6 @@ const Closet = mongoose.model(
     "Closet",
     new mongoose.Schema({
         id: String,
-        date: Date,
         info: String,
         projects: [{
             type: mongoose.Schema.Types.String,

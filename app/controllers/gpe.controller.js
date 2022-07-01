@@ -9,12 +9,11 @@ async function readAllGpes(req, res) {
 const createGpe = (req, res) => {
     const gpe = new Gpe({
         id: req.body.id,
-        date: new Date(),
         deadline: req.body.deadline,
         duration: req.body.duration,
         gpe: req.body.gpe,
-        projects: req.body.projects,
-        prevGpes: req.body.prevGpes
+        projects: req.body.projects || [],
+        prevGpes: req.body.prevGpes || []
     })
 
     gpe.save(err => {

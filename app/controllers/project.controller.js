@@ -1,4 +1,5 @@
 const db = require("../models/index.js");
+const { iReadOrCreateGeneralPriority } = require("./helper.js");
 const Project = db.project;
 
 async function readAllProjects(req, res) {
@@ -6,10 +7,20 @@ async function readAllProjects(req, res) {
     res.send(allProjects);
 }
 
-const createProject = (req, res) => {
+async function createProject(req, res) {
+    let priorityId = req.body.priorityId;
+    if (!priorityId) {
+        priorityId = await iReadOrCreateGeneralPriority();
+        if (!priorityId) {
+            res.status(500).send({ message: "failed to read general priority id" });
+            return;
+        }
+    }
+
     const project = new Project({
         id: req.body.id,
-        title: req.body.title
+        title: req.body.title,
+        priorityId: priorityId
     })
 
     project.save(err => {
@@ -33,7 +44,8 @@ const deleteProject = (req, res) => {
 
 async function changeProject(req, res) {
     const updatedProject = await Project.findOneAndUpdate({ id: req.body.id }, {
-        title: req.body.title
+        title: req.body.title,
+        priority: req.body.priority
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {
                 res.status(500).send({ message: err });

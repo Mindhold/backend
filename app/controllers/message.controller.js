@@ -11,7 +11,7 @@ const createMessage = (req, res) => {
         id: req.body.id,
         date: req.body.date,
         content: req.body.content,
-        projects: req.body.projects
+        projects: req.body.projects || []
     })
 
     message.save(err => {
@@ -36,7 +36,7 @@ const deleteMessage = (req, res) => {
 async function changeMessage(req, res) {
     const updatedMessage = await Message.findOneAndUpdate({ id: req.body.id }, {
         content: req.body.content,
-        projects: req.body.projects
+        projects: req.body.projects || []
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {
                 res.status(500).send({ message: err });
