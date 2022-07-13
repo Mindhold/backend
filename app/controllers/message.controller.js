@@ -27,12 +27,12 @@ async function readAllMessages(req, res) {
     const allMessages = allMessagesWithGoals.map(msg => ({
         linkedGoal: msg.goals.length ? msg.goals[0] : null,
         project: msg.projects.length ? msg.projects[0] : null,
-        id: msg[id],
-        date: msg[date],
-        content: msg[content],
-        type: msg[type]
+        id: msg.id,
+        date: msg.date,
+        content: msg.content,
+        type: msg.type
     }));
-    res.send(allMessages);
+    res.status(200).send(allMessages);
 }
 
 const createMessage = (req, res) => {
