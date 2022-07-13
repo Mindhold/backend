@@ -7,7 +7,7 @@ const Message = mongoose.model(
         date: Date,
         content: String,
         type: String,
-        linkedGoal: {
+        linkedGoalId: {
             type: mongoose.Schema.Types.String,
             ref: "Gpe"
         },

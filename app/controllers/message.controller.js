@@ -2,7 +2,36 @@ const db = require("../models/index.js");
 const Message = db.message;
 
 async function readAllMessages(req, res) {
-    const allMessages = await Message.find({});
+    const allMessagesWithGoals = await Message.aggregate([
+
+        // Stage 1: Get goals
+        { $lookup: {
+                from: "Gpe",
+                localField: "linkedGoalId",
+                foreignField: "id",
+                as: "goals"
+            }
+        },
+
+        // Stage 2: Get projects
+        { $lookup: {
+                from: "Project",
+                localField: "projectId",
+                foreignField: "id",
+                as: "projects"
+            }
+        }
+    ]);
+
+    // Client has different form of displaying messages
+    const allMessages = allMessagesWithGoals.map(msg => ({
+        linkedGoal: msg.goals.length ? msg.goals[0] : null,
+        project: msg.projects.length ? msg.projects[0] : null,
+        id: msg[id],
+        date: msg[date],
+        content: msg[content],
+        type: msg[type]
+    }));
     res.send(allMessages);
 }
 
@@ -12,7 +41,7 @@ const createMessage = (req, res) => {
         date: req.body.date,
         content: req.body.content,
         type: req.body.type,
-        linkedGoal: req.body.linkedGoal,
+        linkedGoalId: req.body.linkedGoalId,
         projectId: req.body.projectId || "000"
     })
 
@@ -39,7 +68,7 @@ async function changeMessage(req, res) {
     const updatedMessage = await Message.findOneAndUpdate({ id: req.body.id }, {
         content: req.body.content,
         type: req.body.type,
-        linkedGoal: req.body.linkedGoal,
+        linkedGoalId: req.body.linkedGoalId,
         projectId: req.body.projectId || "000"
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {
