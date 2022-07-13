@@ -5,13 +5,15 @@ const Gpe = mongoose.model(
     "Gpe",
     new mongoose.Schema({
         id: String,
-        deadline: Date,
+        due_date: Date,
         duration: String,
-        gpe: String,
-        projects: [{
+        name: String,
+        type: String,
+        notes: String,
+        projectId: {
             type: mongoose.Schema.Types.String,
             ref: "Project"
-        }],
+        },
         prevGpes: [{
             type: mongoose.Schema.Types.String,
             ref: "Gpe"

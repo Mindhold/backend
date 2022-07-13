@@ -9,10 +9,12 @@ async function readAllGpes(req, res) {
 const createGpe = (req, res) => {
     const gpe = new Gpe({
         id: req.body.id,
-        deadline: req.body.deadline,
+        due_date: req.body.due_date,
         duration: req.body.duration,
-        gpe: req.body.gpe,
-        projects: req.body.projects || [],
+        name: req.body.name,
+        type: req.body.type,
+        notes: req.body.notes,
+        projectId: req.body.projectId || "000",
         prevGpes: req.body.prevGpes || []
     })
 
@@ -37,11 +39,13 @@ const deleteGpe = (req, res) => {
 
 async function changeGpe(req, res) {
     const updatedGpe = await Gpe.findOneAndUpdate({ id: req.body.id }, {
-        deadline: req.body.deadline,
+        due_date: req.body.due_date,
         duration: req.body.duration,
-        gpe: req.body.gpe,
-        projects: req.body.projects,
-        prevGpes: req.body.prevGpes
+        name: req.body.name,
+        type: req.body.type,
+        notes: req.body.notes,
+        projectId: req.body.projectId || "000",
+        prevGpes: req.body.prevGpes || []
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {
                 res.status(500).send({ message: err });
