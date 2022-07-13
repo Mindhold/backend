@@ -32,7 +32,7 @@ db.mongoose
         process.exit();
     });
 
-require('./app/routes/closet.routes')(app);
+require('./app/routes/memory.routes')(app);
 require('./app/routes/gpe.routes')(app);
 require('./app/routes/message.routes')(app);
 require('./app/routes/project.routes')(app);

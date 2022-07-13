@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const Closet = mongoose.model(
-    "Closet",
+const Memory = mongoose.model(
+    "Memory",
     new mongoose.Schema({
         id: String,
         info: String,
@@ -9,11 +9,11 @@ const Closet = mongoose.model(
             type: mongoose.Schema.Types.String,
             ref: "Project"
         }],
-        linkedClosets: [{
+        linkedMemories: [{
             type: mongoose.Schema.Types.String,
-            ref: "Closet"
+            ref: "Memory"
         }]
     })
 );
 
-module.exports = Closet;
+module.exports = Memory;
