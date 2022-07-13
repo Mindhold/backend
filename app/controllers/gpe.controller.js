@@ -11,6 +11,7 @@ const createGpe = (req, res) => {
         id: req.body.id,
         due_date: req.body.due_date,
         duration: req.body.duration,
+        completed: req.body.completed,
         name: req.body.name,
         type: req.body.type,
         notes: req.body.notes,
@@ -41,6 +42,7 @@ async function changeGpe(req, res) {
     const updatedGpe = await Gpe.findOneAndUpdate({ id: req.body.id }, {
         due_date: req.body.due_date,
         duration: req.body.duration,
+        completed: req.body.completed,
         name: req.body.name,
         type: req.body.type,
         notes: req.body.notes,

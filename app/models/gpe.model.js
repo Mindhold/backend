@@ -7,6 +7,7 @@ const Gpe = mongoose.model(
         id: String,
         due_date: Date,
         duration: String,
+        completed: Boolean,
         name: String,
         type: String,
         notes: String,
