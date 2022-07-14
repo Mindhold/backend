@@ -24,6 +24,7 @@ const createMemory = (req, res) => {
 }
 
 const deleteMemory = (req, res) => {
+    // Memory.deleteMany({}).catch(err => console.log(err));
     Memory.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });

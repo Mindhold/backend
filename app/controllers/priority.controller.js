@@ -23,6 +23,7 @@ const createPriority = (req, res) => {
 }
 
 const deletePriority = (req, res) => {
+    // Priority.deleteMany({}).catch(err => console.log(err));
     Project.deleteMany({ priorityId: req.body.id }, function (err) {if (err) console.log(err);}); // TODO: projects do not need to be removed along with priority
     Priority.deleteOne({ id: req.body.id }, function (err) {
         if (err) {

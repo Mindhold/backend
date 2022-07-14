@@ -29,6 +29,7 @@ const createGpe = (req, res) => {
 }
 
 const deleteGpe = (req, res) => {
+    // Gpe.deleteMany({}).catch(err => console.log(err));
     Gpe.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });

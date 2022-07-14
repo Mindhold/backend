@@ -6,7 +6,7 @@ async function readAllMessages(req, res) {
 
         // Stage 1: Get goals
         { $lookup: {
-                from: "Gpe",
+                from: "gpes",
                 localField: "linkedGoalId",
                 foreignField: "id",
                 as: "goals"
@@ -15,7 +15,7 @@ async function readAllMessages(req, res) {
 
         // Stage 2: Get projects
         { $lookup: {
-                from: "Project",
+                from: "projects",
                 localField: "projectId",
                 foreignField: "id",
                 as: "projects"
@@ -55,6 +55,7 @@ const createMessage = (req, res) => {
 }
 
 const deleteMessage = (req, res) => {
+    // Message.deleteMany({}).catch(err => console.log(err));
     Message.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });

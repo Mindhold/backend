@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // GPE - Goal/Process/Event
 const Gpe = mongoose.model(
-    "Gpe",
+    "gpe",
     new mongoose.Schema({
         id: String,
         due_date: Date,
@@ -13,11 +13,11 @@ const Gpe = mongoose.model(
         notes: String,
         projectId: {
             type: mongoose.Schema.Types.String,
-            ref: "Project"
+            ref: "project"
         },
         prevGpes: [{
             type: mongoose.Schema.Types.String,
-            ref: "Gpe"
+            ref: "gpe"
         }]
     })
 );

@@ -33,6 +33,7 @@ async function createProject(req, res) {
 }
 
 const deleteProject = (req, res) => {
+    // Project.deleteMany({}).catch(err => console.log(err));
     Project.deleteOne({ id: req.body.id }, function (err) {
         if (err) {
             res.status(500).send({ message: err });

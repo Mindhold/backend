@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
 const Project = mongoose.model(
-    "Project",
+    "project",
     new mongoose.Schema({
         id: String,
         title: String,
         priorityId: {
             type: mongoose.Schema.Types.String,
-            ref: "Priority"
+            ref: "priority"
         }
     })
 );

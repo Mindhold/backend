@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const Message = mongoose.model(
-    "Message",
+    "message",
     new mongoose.Schema({
         id: String,
         date: Date,
@@ -9,11 +9,11 @@ const Message = mongoose.model(
         type: String,
         linkedGoalId: {
             type: mongoose.Schema.Types.String,
-            ref: "Gpe"
+            ref: "gpe"
         },
         projectId: {
             type: mongoose.Schema.Types.String,
-            ref: "Project"
+            ref: "project"
         }
     })
 );

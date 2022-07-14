@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
 const Memory = mongoose.model(
-    "Memory",
+    "memory",
     new mongoose.Schema({
         id: String,
         info: String,
         projects: [{
             type: mongoose.Schema.Types.String,
-            ref: "Project"
+            ref: "project"
         }],
         linkedMemories: [{
             type: mongoose.Schema.Types.String,
-            ref: "Memory"
+            ref: "memory"
         }]
     })
 );
