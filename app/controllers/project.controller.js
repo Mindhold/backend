@@ -20,6 +20,7 @@ async function createProject(req, res) {
     const project = new Project({
         id: req.body.id,
         title: req.body.title,
+        color: req.body.color || "black",
         priorityId: priorityId
     })
 
@@ -46,6 +47,7 @@ const deleteProject = (req, res) => {
 async function changeProject(req, res) {
     const updatedProject = await Project.findOneAndUpdate({ id: req.body.id }, {
         title: req.body.title,
+        color: req.body.color || "black",
         priority: req.body.priority
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {

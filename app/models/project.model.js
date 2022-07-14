@@ -5,6 +5,7 @@ const Project = mongoose.model(
     new mongoose.Schema({
         id: String,
         title: String,
+        color: String,
         priorityId: {
             type: mongoose.Schema.Types.String,
             ref: "priority"
