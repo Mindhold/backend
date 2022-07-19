@@ -2,8 +2,12 @@ const db = require("../models/index.js");
 const Gpe = db.gpe;
 
 async function readAllGpes(req, res) {
-    const allGpes = await Gpe.find({});
-    res.send(allGpes);
+    // TODO: resolve linkedGpes. They need to come before.
+    const allGpes = await Gpe.aggregate([{$sort: {due_date: -1}}]);
+    const firstUndatedIndex = allGpes.findIndex(gpe => !("due_date" in gpe) || gpe.due_date === null);
+    const datedGpes = allGpes.slice(0, firstUndatedIndex);
+    const undatedGpes = allGpes.slice(firstUndatedIndex);
+    res.send({"dated": datedGpes, "undated": undatedGpes});
 }
 
 const createGpe = (req, res) => {
