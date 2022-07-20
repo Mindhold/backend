@@ -15,10 +15,10 @@ const Gpe = mongoose.model(
             type: mongoose.Schema.Types.String,
             ref: "project"
         },
-        prevGpes: [{
+        prevGpe: {
             type: mongoose.Schema.Types.String,
             ref: "gpe"
-        }]
+        }
     })
 );
 

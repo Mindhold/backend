@@ -1,4 +1,4 @@
-const { createGpe, deleteGpe, changeGpe, readAllGpes } = require("../controllers/gpe.controller.js");
+const { createGpe, deleteGpe, changeGpe, readAllGpes, readAllGpesByProjectId } = require("../controllers/gpe.controller.js");
  
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -10,6 +10,7 @@ module.exports = function(app) {
     });
 
     app.get("/gpe", readAllGpes)
+    app.post("/gpe/projectId", readAllGpesByProjectId);
     app.post("/gpe", createGpe);
     app.delete("/gpe", deleteGpe);
     app.put("/gpe", changeGpe);
