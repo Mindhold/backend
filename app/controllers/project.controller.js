@@ -48,7 +48,7 @@ async function changeProject(req, res) {
     const updatedProject = await Project.findOneAndUpdate({ id: req.body.id }, {
         title: req.body.title,
         color: req.body.color || "black",
-        priority: req.body.priority
+        priorityId: req.body.priorityId
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {
                 res.status(500).send({ message: err });
