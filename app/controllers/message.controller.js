@@ -1,6 +1,42 @@
 const db = require("../models/index.js");
 const Message = db.message;
 
+async function readAllMessagesFilterByProjectId(req, res) {
+    const allMessagesWithGoals = await Message.aggregate([
+        // Stage 1: Filter by projectId
+        {$match: {projectId: req.body.projectId}},
+
+        // Stage 2: Get goals
+        { $lookup: {
+                from: "gpes",
+                localField: "linkedGoalId",
+                foreignField: "id",
+                as: "goals"
+            }
+        },
+
+        // Stage 3: Get projects
+        { $lookup: {
+                from: "projects",
+                localField: "projectId",
+                foreignField: "id",
+                as: "projects"
+            }
+        }
+    ]);
+
+    // Client has different form of displaying messages
+    const allMessages = allMessagesWithGoals.map(msg => ({
+        linkedGoal: msg.goals.length ? msg.goals[0] : null,
+        project: msg.projects.length ? msg.projects[0] : null,
+        id: msg.id,
+        date: msg.date,
+        content: msg.content,
+        type: msg.type
+    }));
+    res.status(200).send(allMessages);
+}
+
 async function readAllMessages(req, res) {
     const allMessagesWithGoals = await Message.aggregate([
 
@@ -82,6 +118,7 @@ async function changeMessage(req, res) {
 }
 
 module.exports = {
+    readAllMessagesFilterByProjectId,
     readAllMessages,
     createMessage,
     deleteMessage,

@@ -1,4 +1,4 @@
-const { createMessage, deleteMessage, changeMessage, readAllMessages } = require("../controllers/message.controller.js");
+const { createMessage, deleteMessage, changeMessage, readAllMessages, readAllMessagesFilterByProjectId } = require("../controllers/message.controller.js");
  
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -8,6 +8,8 @@ module.exports = function(app) {
         );
         next();
     });
+
+    app.post("/message/projectId", readAllMessagesFilterByProjectId);
 
     app.get("/message", readAllMessages)
     app.post("/message", createMessage);

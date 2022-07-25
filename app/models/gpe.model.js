@@ -11,6 +11,8 @@ const Gpe = mongoose.model(
         name: String,
         type: String,
         notes: String,
+        date: Date,
+        location: String,
         projectId: {
             type: mongoose.Schema.Types.String,
             ref: "project"
