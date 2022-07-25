@@ -17,7 +17,7 @@ const Gpe = mongoose.model(
             type: mongoose.Schema.Types.String,
             ref: "project"
         },
-        prevGpe: {
+        prevGpeId: {
             type: mongoose.Schema.Types.String,
             ref: "gpe"
         }

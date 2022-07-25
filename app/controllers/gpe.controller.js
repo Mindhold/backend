@@ -34,7 +34,7 @@ const createGpe = (req, res) => {
         date: req.body.date,
         location: req.body.location,
         projectId: req.body.projectId || "000",
-        prevGpe: req.body.prevGpe || null
+        prevGpeId: req.body.prevGpeId || null
     })
 
     gpe.save(err => {
@@ -68,7 +68,7 @@ async function changeGpe(req, res) {
         date: req.body.date,
         location: req.body.location,
         projectId: req.body.projectId || "000",
-        prevGpe: req.body.prevGpe || null
+        prevGpeId: req.body.prevGpeId || null
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
             if (err) {
                 res.status(500).send({ message: err });
