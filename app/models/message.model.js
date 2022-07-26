@@ -6,7 +6,6 @@ const Message = mongoose.model(
         id: String,
         date: Date,
         content: String,
-        type: String,
         linkedGoalId: {
             type: mongoose.Schema.Types.String,
             ref: "gpe"
