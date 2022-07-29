@@ -31,7 +31,8 @@ async function readAllMessagesFilterByProjectId(req, res) {
         project: msg.projects.length ? msg.projects[0] : null,
         id: msg.id,
         date: msg.date,
-        content: msg.goals.length ? msg.goals[0].name : msg.content
+        content: msg.goals.length ? msg.goals[0].name : msg.content,
+        isIncoming: msg.isIncoming
     }));
     res.status(200).send(allMessages);
 }
@@ -64,7 +65,8 @@ async function readAllMessages(req, res) {
         project: msg.projects.length ? msg.projects[0] : null,
         id: msg.id,
         date: msg.date,
-        content: msg.goals.length ? msg.goals[0].name : msg.content
+        content: msg.goals.length ? msg.goals[0].name : msg.content,
+        isIncoming: msg.isIncoming
     }));
     res.status(200).send(allMessages);
 }
@@ -74,6 +76,7 @@ const createMessage = (req, res) => {
         id: req.body.id,
         date: req.body.date,
         content: req.body.content,
+        isIncoming: req.body.isIncoming,
         linkedGoalId: req.body.linkedGoalId,
         projectId: req.body.projectId || "000"
     })
@@ -101,6 +104,7 @@ const deleteMessage = (req, res) => {
 async function changeMessage(req, res) {
     const updatedMessage = await Message.findOneAndUpdate({ id: req.body.id }, {
         content: req.body.content,
+        isIncoming: req.body.isIncoming,
         linkedGoalId: req.body.linkedGoalId,
         projectId: req.body.projectId || "000"
         }, {new: true, useFindAndModify: false}, function(err, putResponse) {
